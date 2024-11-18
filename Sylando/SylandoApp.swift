@@ -11,7 +11,7 @@ import SwiftUI
 struct SylandoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ShirtListView()
         }
     }
 }
