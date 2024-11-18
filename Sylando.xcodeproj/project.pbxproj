@@ -19,8 +19,10 @@
 				"Preview Content/Preview Assets.xcassets",
 				SylandoApp.swift,
 				Utils/Enums.swift,
+				ViewModels/CartViewModel.swift,
 				ViewModels/ShirtsViewModel.swift,
-				Views/CartView.swift,
+				Views/Cart/CartView.swift,
+				Views/Cart/SubViews/CheckOutView.swift,
 				Views/NavigatorView.swift,
 				Views/ShirtListView.swift,
 			);

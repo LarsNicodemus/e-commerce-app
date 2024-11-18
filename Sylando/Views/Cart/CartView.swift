@@ -13,6 +13,12 @@ struct CartView: View {
                     List() {
                     }
                     .navigationTitle("Shopping Cart")
+            
+                NavigationLink(destination: {
+                    CheckOutView()
+                }, label: {
+                    Text("Check Out")
+                }).buttonStyle(.borderedProminent)
                 }
     }
 }

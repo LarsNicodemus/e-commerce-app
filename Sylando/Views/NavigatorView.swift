@@ -13,11 +13,14 @@ struct NavigatorView: View {
         TabView(selection: $selectedTab){
             Tab(TabSelection.shirts.rawValue, systemImage: TabSelection.shirts.icon, value: TabSelection.shirts){
                 ShirtListView()
+                    .padding()
             }
             Tab(TabSelection.cart.rawValue, systemImage: TabSelection.cart.icon, value: TabSelection.cart){
                 CartView()
+                    .padding()
             }
         }
+        
     }
 }
 

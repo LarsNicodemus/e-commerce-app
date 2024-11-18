@@ -14,6 +14,8 @@ struct ShirtListView: View {
                     List(vm.shirts) { shirt in
                         Text(shirt.title)
                     }
+//                    .listStyle(.plain)
+//                    .background(Color.clear)
                     .navigationTitle("Shirts")
                 }
     }
