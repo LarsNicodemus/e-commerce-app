@@ -15,8 +15,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				Data/Models/Shirt.swift,
 				"Preview Content/Preview Assets.xcassets",
 				SylandoApp.swift,
+				ViewModels/ShirtsViewModel.swift,
 				Views/ShirtListView.swift,
 			);
 			target = DEFC521F2CEB44A300C2C3D0 /* Sylando */;

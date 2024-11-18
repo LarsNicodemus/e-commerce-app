@@ -6,10 +6,8 @@
 //
 import SwiftUI
 
-
 @MainActor
 class ShirtsViewModel: ObservableObject {
-    
     @Published var shirts: [Shirt] = [
         Shirt(title: "Shirt1", price: 14.99, size: "M"),
         Shirt(title: "Shirt2", price: 18.99, size: "L"),
