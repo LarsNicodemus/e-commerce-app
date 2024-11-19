@@ -16,4 +16,5 @@ class CartViewModel: ObservableObject {
         Shirt(title: "Shirt2", price: 18.99, size: "L"),
         Shirt(title: "Shirt3", price: 20.99, size: "S")
     ]
+    @Published var orderReceived: Bool = false
 }
