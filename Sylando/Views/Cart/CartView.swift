@@ -8,21 +8,33 @@
 import SwiftUI
 
 struct CartView: View {
+    @EnvironmentObject
+    private var cartVm: CartViewModel
+    @State private var path = NavigationPath()
     var body: some View {
-        NavigationStack {
-                    List() {
+        NavigationStack(path: $path) {
+                    List(cartVm.cartShirts) { shirt in
+                        Text(shirt.title)
                     }
                     .navigationTitle("Shopping Cart")
-            
-                NavigationLink(destination: {
-                    CheckOutView()
-                }, label: {
-                    Text("Check Out")
-                }).buttonStyle(.borderedProminent)
+                    
+                    Button("Check Out") {
+                        path.append("CheckOut")
+                        print(path.count)
+                        print(path)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .navigationDestination(for: String.self) { destination in
+                        if destination == "CheckOut" {
+                            CheckOutView(path: $path)
+                        }
+                    }
+                    
                 }
     }
 }
 
 #Preview {
     CartView()
+        .environmentObject(CartViewModel())
 }

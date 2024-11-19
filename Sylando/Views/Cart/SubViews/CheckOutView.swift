@@ -9,36 +9,53 @@ import SwiftUI
 
 struct CheckOutView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var vm = CartViewModel()
+    @EnvironmentObject
+    private var cartVm: CartViewModel
+    @State private var showError = false
+    @Binding var path: NavigationPath
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 16){
-                Text("Bitte gib deine Daten ein:")
-                    .padding(.top,64)
-                TextField(vm.name.isEmpty ? "Name" : vm.name, text: $vm.name)
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(10)
-                TextField(vm.street.isEmpty ? "Street" : vm.street, text: $vm.street)
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(10)
-                TextField(vm.city.isEmpty ? "City" : vm.city, text: $vm.city)
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(10)
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Bitte gib deine Daten ein:")
+                .padding(.top, 64)
+            TextField("Name", text: $cartVm.name)
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(10)
+            TextField("Street", text: $cartVm.street)
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(10)
+            TextField("City", text: $cartVm.city)
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(10)
+
+            if showError {
+                Text("Bitte fülle alle Felder aus.")
+                    .foregroundColor(.red)
+                    .font(.caption)
             }
+
             Spacer()
-            Button {
-                dismiss()
-            } label: {
-                Text("Buy")
-            }.buttonStyle(.borderedProminent)
-                .padding(.bottom,64)
+                .navigationTitle("CheckOut")
+            
+        }
+        .padding()
+        Button("Weiter") {
+            path.append("Summary")
+            print(path.count)
+            print(path)
+        }
+        .buttonStyle(.borderedProminent)
+        .navigationDestination(for: String.self) { destination in
+            if destination == "Summary" {
+                SummaryView(path: $path)
+            }
         }
     }
 }
 
 #Preview {
-    CheckOutView()
+    CheckOutView(path: .constant(NavigationPath()))
+        .environmentObject(CartViewModel())
 }

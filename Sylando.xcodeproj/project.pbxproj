@@ -23,7 +23,9 @@
 				ViewModels/ShirtsViewModel.swift,
 				Views/Cart/CartView.swift,
 				Views/Cart/SubViews/CheckOutView.swift,
+				Views/Cart/SubViews/SummaryView.swift,
 				Views/NavigatorView.swift,
+				Views/ShirtAddView.swift,
 				Views/ShirtListView.swift,
 			);
 			target = DEFC521F2CEB44A300C2C3D0 /* Sylando */;

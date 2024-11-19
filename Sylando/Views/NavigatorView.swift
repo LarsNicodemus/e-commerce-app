@@ -9,14 +9,17 @@ import SwiftUI
 
 struct NavigatorView: View {
     @State private var selectedTab: TabSelection = .shirts
+    @StateObject private var cartVm: CartViewModel = CartViewModel()
     var body: some View {
         TabView(selection: $selectedTab){
             Tab(TabSelection.shirts.rawValue, systemImage: TabSelection.shirts.icon, value: TabSelection.shirts){
                 ShirtListView()
+                    .environmentObject(cartVm)
                     .padding()
             }
             Tab(TabSelection.cart.rawValue, systemImage: TabSelection.cart.icon, value: TabSelection.cart){
                 CartView()
+                    .environmentObject(cartVm)
                     .padding()
             }
         }
