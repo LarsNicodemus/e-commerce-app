@@ -16,19 +16,22 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				Data/Models/Shirt.swift,
-				Data/Models/Site.swift,
 				"Preview Content/Preview Assets.xcassets",
 				SylandoApp.swift,
 				Utils/Enums.swift,
 				ViewModels/CartViewModel.swift,
 				ViewModels/ShirtsViewModel.swift,
 				Views/Cart/CartView.swift,
+				Views/Cart/SubViews/CartListRowView.swift,
 				Views/Cart/SubViews/CartSubView.swift,
 				Views/Cart/SubViews/CheckoutView.swift,
+				Views/Cart/SubViews/SummaryBodyView.swift,
+				Views/Cart/SubViews/SummaryThxView.swift,
 				Views/Cart/SubViews/SummaryView.swift,
 				Views/NavigatorView.swift,
-				Views/ShirtAddView.swift,
-				Views/ShirtListView.swift,
+				Views/ShirtList/ShirtListView.swift,
+				Views/ShirtList/SubViews/ShirtAddView.swift,
+				Views/ShirtList/SubViews/ShirtListRowView.swift,
 			);
 			target = DEFC521F2CEB44A300C2C3D0 /* Sylando */;
 		};

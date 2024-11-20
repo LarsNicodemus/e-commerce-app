@@ -11,14 +11,19 @@ struct CartSubView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject
     private var cartVm: CartViewModel
-    @State private var showError = false
-    @State var buttonPressed = false
     var body: some View {
-        if !buttonPressed {
-            CheckoutView(showError: $showError, buttonPressed: $buttonPressed)
+        if !cartVm.buttonPressed {
+            withAnimation {
+                CheckoutView()
+                    .navigationBarBackButtonHidden(cartVm.showThx)
+            }
         } else {
-            SummaryView(buttonPressed: $buttonPressed)
+            withAnimation {
+                SummaryView()
+                    .navigationBarBackButtonHidden(cartVm.showThx)
+            }
         }
+        
     }
 }
 

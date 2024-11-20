@@ -15,12 +15,12 @@ struct NavigatorView: View {
             Tab(TabSelection.shirts.rawValue, systemImage: TabSelection.shirts.icon, value: TabSelection.shirts){
                 ShirtListView()
                     .environmentObject(cartVm)
-                    .padding()
+                    .padding(.vertical)
             }
             Tab(TabSelection.cart.rawValue, systemImage: TabSelection.cart.icon, value: TabSelection.cart){
                 CartView()
                     .environmentObject(cartVm)
-                    .padding()
+                    .padding(.vertical)
             }
         }
         

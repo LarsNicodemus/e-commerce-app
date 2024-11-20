@@ -11,8 +11,7 @@ struct CheckoutView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject
     private var cartVm: CartViewModel
-    @Binding var showError: Bool
-    @Binding var buttonPressed: Bool
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 16) {
@@ -30,7 +29,7 @@ struct CheckoutView: View {
                     .padding()
                     .background(Color.blue.opacity(0.1))
                     .cornerRadius(10)
-                if showError {
+                if cartVm.showError {
                     Text("Bitte fülle alle Felder aus.")
                         .foregroundColor(.red)
                         .font(.caption)
@@ -39,14 +38,21 @@ struct CheckoutView: View {
             }
             .padding()
             Button("Weiter") {
-                buttonPressed = true
+                if !cartVm.name.isEmpty && !cartVm.street.isEmpty && !cartVm.city.isEmpty {
+                    cartVm.buttonPressed = true
+                    cartVm.showError = false
+                } else {
+                    cartVm.showError = true
+                }
+                
             }
+            .padding(.bottom, 64)
             .buttonStyle(.borderedProminent)
         }
     }
 }
 
 #Preview {
-    CheckoutView(showError: .constant(false), buttonPressed: .constant(false))
+    CheckoutView()
         .environmentObject(CartViewModel())
 }

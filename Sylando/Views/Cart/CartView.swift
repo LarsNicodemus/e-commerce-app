@@ -13,16 +13,19 @@ struct CartView: View {
     private var cartVm: CartViewModel
     var body: some View {
         NavigationStack {
-                    List(cartVm.cartShirts) { shirt in
-                        Text(shirt.title)
-                    }
-                    .navigationTitle("Shopping Cart")
-                    
+            List(cartVm.cartShirts) { shirt in
+                CartListRowView(shirt: shirt)
+                    .listRowSeparator(.hidden)
+            }
+            .listStyle(.plain)
+            .navigationTitle("Shopping Cart")
+
             NavigationLink("Check Out") {
                 CartSubView()
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
+            }
+            .padding(.bottom, 64)
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
 

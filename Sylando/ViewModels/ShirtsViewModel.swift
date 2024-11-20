@@ -21,4 +21,8 @@ class ShirtsViewModel: ObservableObject {
     func addShirt(shirt: Shirt){
         shirts.append(shirt)
     }
+    func deleteShirt(_ shirt: Shirt) {
+        guard let index = shirts.firstIndex(where: { $0.id == shirt.id }) else { return }
+        shirts.remove(at: index)
+    }
 }
