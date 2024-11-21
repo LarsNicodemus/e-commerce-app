@@ -12,20 +12,40 @@ struct CartView: View {
     @EnvironmentObject
     private var cartVm: CartViewModel
     var body: some View {
-        NavigationStack {
-            List(cartVm.cartShirts) { shirt in
-                CartListRowView(shirt: shirt)
-                    .listRowSeparator(.hidden)
-            }
-            .listStyle(.plain)
-            .navigationTitle("Shopping Cart")
+        NavigationStack(path: $cartVm.navigationPath) {
+                    VStack {
+                        if cartVm.cartShirts.isEmpty {
+                            Spacer()
+                            Text("Dein Warenkorb ist leer.")
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                                .padding()
+                            Spacer()
+                        } else {
+                            List(cartVm.cartShirts) { shirt in
+                                CartListRowView(shirt: shirt)
+                                    .listRowSeparator(.hidden)
+                            }
+                            .listStyle(.plain)
+                        }
 
-            NavigationLink("Check Out") {
-                CartSubView()
-            }
-            .padding(.bottom, 64)
-            .buttonStyle(.borderedProminent)
-        }
+                        NavigationLink("Check Out", value: checkoutviews.checkoutview)
+                            .padding(.bottom, 64)
+                            .buttonStyle(.borderedProminent)
+                            .disabled(cartVm.cartShirts.isEmpty)
+                    }
+                    .navigationTitle("Shopping Cart")
+                    .navigationDestination(for: checkoutviews.self) { view in
+                        switch view {
+                        case .checkoutview:
+                            CheckoutView()
+                        case .summaryview:
+                            SummaryView()
+                        default:
+                            EmptyView() 
+                        }
+                    }
+                }
     }
 }
 

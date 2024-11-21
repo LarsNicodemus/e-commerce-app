@@ -9,22 +9,48 @@ import SwiftUI
 
 struct ShirtAddView: View {
     @ObservedObject var shirtVm: ShirtsViewModel
-
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    HStack {
-                        Spacer()
-                        Button("Change Design") {
-
+                    VStack {
+                        if let quote = shirtVm.quote {
+                            ZStack {
+                                Image(systemName: "tshirt.fill")
+                                    .font(.system(size: 200))
+                                    .fontWeight(.ultraLight)
+                                    .foregroundStyle(shirtVm.colorPicker.color)
+                                    .overlay(
+                                        Image(systemName: "tshirt")
+                                            .font(.system(size: 200))
+                                            .fontWeight(.ultraLight)
+                                            .foregroundStyle(.black)
+                                    )
+                                Text(quote.text)
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .frame(width: 110)
+                                    .foregroundStyle(shirtVm.textColorPicker.color)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .frame(maxWidth: .infinity)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                        Spacer()
+
+                        HStack {
+                            Spacer()
+                            Button("Change Design") {
+                                shirtVm.fetchQuote()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                            Spacer()
+                        }
+
                     }
                 }
-
+                Section {
+                    ColorPickerView(shirtVm: shirtVm)
+                }
                 Section {
                     TextField("Titel", text: $shirtVm.shirtTitle)
                         .padding()
@@ -43,8 +69,9 @@ struct ShirtAddView: View {
                     }
                     .padding()
                 }
+
                 Section {
-                    
+
                     TextField("Preis", text: $shirtVm.shirtPrice)
                         .keyboardType(.numberPad)
                         .padding()
@@ -63,13 +90,22 @@ struct ShirtAddView: View {
             }
             .listSectionSpacing(8)
         }
+        .onAppear {
+            shirtVm.fetchQuote()
+        }
         .navigationTitle("Neues T-Shirt")
     }
+
     func addShirt() {
         if !shirtVm.shirtPrice.isEmpty && !shirtVm.shirtTitle.isEmpty {
-            let convertPrice = shirtVm.shirtPrice.replacingOccurrences(of: ",", with: ".")
+            let convertPrice = shirtVm.shirtPrice.replacingOccurrences(
+                of: ",", with: ".")
             guard let price = Double(convertPrice) else { return }
-            let newShirt = Shirt(title: shirtVm.shirtTitle, price: price, size: shirtVm.selectedSize.rawValue)
+            guard let quote = shirtVm.quote else { return }
+            let newShirt = Shirt(
+                title: shirtVm.shirtTitle, price: price,
+                size: shirtVm.selectedSize.title,
+                color: shirtVm.colorPicker.color, quoteText: quote.text, quoteTextColor: shirtVm.textColorPicker.color)
             shirtVm.addShirt(shirt: newShirt)
             shirtVm.shirtTitle = ""
             shirtVm.shirtPrice = ""

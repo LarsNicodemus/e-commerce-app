@@ -15,8 +15,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				Data/Models/Quote.swift,
 				Data/Models/Shirt.swift,
 				"Preview Content/Preview Assets.xcassets",
+				Repositories/QuoteRepository.swift,
 				SylandoApp.swift,
 				Utils/Enums.swift,
 				ViewModels/CartViewModel.swift,
@@ -30,6 +32,7 @@
 				Views/Cart/SubViews/SummaryView.swift,
 				Views/NavigatorView.swift,
 				Views/ShirtList/ShirtListView.swift,
+				Views/ShirtList/SubViews/ColorPickerView.swift,
 				Views/ShirtList/SubViews/ShirtAddView.swift,
 				Views/ShirtList/SubViews/ShirtListRowView.swift,
 			);

@@ -11,7 +11,7 @@ struct CheckoutView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject
     private var cartVm: CartViewModel
-    
+
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 16) {
@@ -38,17 +38,20 @@ struct CheckoutView: View {
             }
             .padding()
             Button("Weiter") {
-                if !cartVm.name.isEmpty && !cartVm.street.isEmpty && !cartVm.city.isEmpty {
-                    cartVm.buttonPressed = true
+                if !cartVm.name.isEmpty && !cartVm.street.isEmpty
+                    && !cartVm.city.isEmpty
+                {
+                    cartVm.navigationPath.append(checkoutviews.summaryview)
                     cartVm.showError = false
                 } else {
                     cartVm.showError = true
                 }
-                
+
             }
             .padding(.bottom, 64)
             .buttonStyle(.borderedProminent)
         }
+        .navigationTitle("Check Out")
     }
 }
 

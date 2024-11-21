@@ -32,9 +32,26 @@ CartListRowView: View {
             .padding()
             .background(.gray.opacity(0.3))
             .clipShape(RoundedRectangle(cornerRadius: 10))
-            Image(systemName: "tshirt.fill")
-                .resizable()
-                .frame(width: 60, height: 60)
+            ZStack{
+                Image(systemName: "tshirt.fill")
+                    .font(.system(size: 60))
+                    .fontWeight(.ultraLight)
+                    .foregroundStyle(shirt.color)
+                    .overlay(
+                        Image(systemName: "tshirt")
+                            .font(.system(size: 60))
+                            .fontWeight(.ultraLight)
+                            .foregroundStyle(.black)
+                    )
+                if let quote = shirt.quoteText{
+                    Text(quote)
+                        .font(.system(size: 3))
+                        .bold()
+                        .frame(width: 30)
+                        .foregroundColor(shirt.quoteTextColor)
+                        .multilineTextAlignment(.center)
+                }
+            }
         }
         .swipeActions {
             Button(role: .destructive) {

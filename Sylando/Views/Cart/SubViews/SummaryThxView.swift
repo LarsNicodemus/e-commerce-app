@@ -11,7 +11,7 @@ struct SummaryThxView: View {
     @EnvironmentObject
     var cartVm: CartViewModel
     var body: some View {
-        VStack(spacing: 16){
+        VStack(alignment: .leading, spacing: 16){
             Spacer()
             Text("\(cartVm.name), vielen Dank für dein Vertrauen!")
                 .font(.system(size: 20))
