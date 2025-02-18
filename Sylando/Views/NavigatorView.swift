@@ -23,7 +23,6 @@ struct NavigatorView: View {
                     .padding(.vertical)
             }
         }
-        
     }
 }
 
